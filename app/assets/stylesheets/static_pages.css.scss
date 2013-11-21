@@ -1,3 +1,32 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@font-face {
+    font-family: 'Nexa Bold';
+    src: url('NexaBold.otf'); 
+}
+
+@font-face {
+    font-family: 'Nexa Light';
+    src: url('NexaLight.otf');
+}
+
+.facebook{
+	background: #3b5998;
+	width: 80%;
+	max-width: 275px;
+	border-radius: 2px;
+	padding: 20px 20px;
+	cursor: pointer;
+	margin-bottom: 15px;
+	color: white;
+	font-size: 18px;
+	font-family: "Nexa Light"
+}
+
+.facebook:hover{
+	background: #37528c;
+}
+
