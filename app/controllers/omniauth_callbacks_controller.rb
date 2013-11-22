@@ -13,7 +13,19 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 		if user
 			sign_in_and_redirect user
 		else
-			User.create(email: email, name: name, password: Devise.friendly_token, provider: provider, oauth_token: oauth_token, oauth_expires_at: oauth_expires_at, uid: uid)
+			new_user = User.create(email: email, name: name, password: Devise.friendly_token, provider: provider, oauth_token: oauth_token, oauth_expires_at: oauth_expires_at, uid: uid)
+			graph = new_user.facebook
+			if new_user.save
+			    if graph
+			      g = graph.fql_query("SELECT url FROM square_profile_pic WHERE id = me() AND size=200")
+			      g = JSON.parse(g.to_json)
+			      image = g[0]["url"]
+			      new_user.profile_image = image
+			      new_user.save!
+			    end
+			   new_user.delay.get_user_info
+			   new_user.delay.get_friend_info
+			end
 			redirect_to root_path
 		end
 	end
