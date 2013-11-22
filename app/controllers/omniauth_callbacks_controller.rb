@@ -23,8 +23,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			      new_user.profile_image = image
 			      new_user.save!
 			    end
-			   # new_user.delay.get_user_info
-			   # new_user.delay.get_friend_info
+			    new_user.delay.get_user_info
 			end
 			redirect_to root_path
 		end
