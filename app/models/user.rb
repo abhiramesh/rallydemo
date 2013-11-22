@@ -5,13 +5,28 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :provider, :oauth_token, :oauth_expires_at, :uid, :profile_image
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :provider, :oauth_token, :oauth_expires_at, :uid, :profile_image, :authentication_token
   
   has_many :friends, dependent: :destroy
 
   has_many :eventinvites, dependent: :destroy
   has_many :events, through: :eventinvites
   has_many :friendlists
+
+  before_save :ensure_authentication_token
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
+  def generate_authentication_token
+    loop do
+      token = SecureRandom.hex
+      break token unless User.where(authentication_token: token).first
+    end
+  end
 
   def facebook
     @facebook ||= Koala::Facebook::API.new(self.oauth_token)

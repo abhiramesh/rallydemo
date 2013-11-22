@@ -1,17 +1,15 @@
 Rally::Application.routes.draw do
   resources :friendlistmembers
-
-
   resources :friendlists
-
-
   resources :eventinvites
-
-
   resources :events
-
-
   resources :friends
+
+  namespace :api do
+    namespace :v1 do
+      resources :users
+    end
+  end
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do
