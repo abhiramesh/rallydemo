@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  eid: MyString
+  creator_id: 1
+  all_members_count: MyString
+  attending_count: MyString
+  declined_count: MyString
+  name: MyText
+  pic_big: MyText
+  start_time: MyString
+  unsure_count: MyString
+  location: MyText
+  description: MyText
+  source: MyString
+
+two:
+  eid: MyString
+  creator_id: 1
+  all_members_count: MyString
+  attending_count: MyString
+  declined_count: MyString
+  name: MyText
+  pic_big: MyText
+  start_time: MyString
+  unsure_count: MyString
+  location: MyText
+  description: MyText
+  source: MyString

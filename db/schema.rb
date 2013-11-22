@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122020209) do
+ActiveRecord::Schema.define(:version => 20131122065945) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -28,6 +28,69 @@ ActiveRecord::Schema.define(:version => 20131122020209) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "eventinvites", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "eid"
+    t.string   "rsvp_status"
+    t.integer  "event_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "uid"
+  end
+
+  add_index "eventinvites", ["event_id"], :name => "index_eventinvites_on_event_id"
+  add_index "eventinvites", ["user_id"], :name => "index_eventinvites_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "eid"
+    t.integer  "creator_id"
+    t.string   "all_members_count"
+    t.string   "attending_count"
+    t.string   "declined_count"
+    t.text     "name"
+    t.text     "pic_big"
+    t.string   "start_time"
+    t.string   "unsure_count"
+    t.text     "location"
+    t.text     "description"
+    t.string   "source"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "friendlistmembers", :force => true do |t|
+    t.integer  "friendlist_id"
+    t.string   "uid"
+    t.string   "flid"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "friendlistmembers", ["friendlist_id"], :name => "index_friendlistmembers_on_friendlist_id"
+
+  create_table "friendlists", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "count"
+    t.string   "flid"
+    t.string   "name"
+    t.string   "ftype"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friendlists", ["user_id"], :name => "index_friendlists_on_user_id"
+
+  create_table "friends", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "uid"
+    t.text     "pic_square"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friends", ["user_id"], :name => "index_friends_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
