@@ -4,37 +4,22 @@
 	<div class="map"><%= image_tag("map.png") %></div>
 
 	<div class="event-boxes" align="center">
-		<div class="row event-trio">
-			<% count = 0 %>
-			<%(0..2).each do |event| %>
-				<div class="col-md-4 event-box" id="myModal<%=count%>">
-					<div class="event-details">
-						<span class="event-name">Event name</span>
-						<span class="event-datetime">Nov 24 @ 10pm</span>
+		<% @eventinvites.each_slice(3) do |batch| %>
+			<div class="row-fluid event-trio">
+				<% batch.each do |invite| %>
+					<div class="col-md-4 event-box" id="myModal<%=invite.id%>">
+						<div class="event-details">
+							<span class="event-name"><%=invite.event.name[0..30]%>...</span>
+						</div>
+						<div class="event-image">
+							<img src="<%=invite.event.pic_big%>">
+						</div>
+						<span class="event-datetime"><%=Date::MONTHNAMES[invite.event.start_time.to_datetime.month]%> <%= invite.event.start_time.to_datetime.day %> <%=invite.event.start_time.to_datetime.strftime("%-I:%M %P")%></span>
 						<span class="event-distance">.1 miles</span>
 					</div>
-					<div class="event-image">
-						<%= image_tag("image.png") %>
-					</div>
-				</div>
-				<% count += 1 %>
-			<% end %>
-		</div>
-		<div class="row event-trio">
-			<% count = 0 %>
-			<%(0..2).each do |event| %>
-				<div class="col-md-4 event-box" id="myModal<%=count%>">
-					<div class="event-details">
-						<span class="event-name">Event name</span>
-						<span class="event-datetime">Nov 24 @ 10pm</span>
-						<span class="event-distance">.1 miles</span>
-					</div>
-					<div class="event-image">
-						<%= image_tag("image.png") %>
-					</div>
-				</div>
-			<% end %>
-		</div>
+				<% end %>
+			</div>
+		<% end %>
 	</div>
 
 	<!-- Modal --> 

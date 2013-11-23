@@ -6,12 +6,16 @@ html, body, p, div {
 .map {
 	width: 100%;
 	text-align: center;
+	img {
+		width: inherit;
+	}
 }
 
 .event-boxes {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 30px;
+	font-family: 'Nexa Light';
 }
 
 .event-trio {
@@ -22,8 +26,11 @@ html, body, p, div {
 .event-box {
 	overflow: hidden;
 	vertical-align: top;
+	border: solid 1px #777;
 	img {
-		border-radius: 9px;
+		border-radius: 5px;
+		width: 200px;
+		height: 200px;
 	}
 }
 
