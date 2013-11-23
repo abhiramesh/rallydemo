@@ -6,8 +6,9 @@ Rally::Application.routes.draw do
   resources :friends
   
 
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do
-    match '/logout', :to => "devise/sessions#destroy"
+    get '/users/sign_out', :to => "devise/sessions#destroy", :as => "logout"
     get '/users/auth/facebook', :to => "omniauth_callbacks#facebook"
   end
 
