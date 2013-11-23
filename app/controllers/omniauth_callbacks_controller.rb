@@ -23,9 +23,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			      new_user.profile_image = image
 			      new_user.save!
 			    end
-			    new_user.delay.get_user_info
+			    job = new_user.delay.get_user_info
+			    sign_in new_user
+			    redirect_to eventinvites_path(:waiting => job.id)
+			else
+				redirect_to root_path
 			end
-			redirect_to root_path
 		end
 	end
 
