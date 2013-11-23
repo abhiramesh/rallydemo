@@ -1,8 +1,13 @@
+<% content_for :head do %>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmBqzXvilpQ0kjH5WF5RrGrLYaDiBYE6Y&sensor=false", "maps/eventmap.js" %>
+<% end %>
+
 <% if @eventinvites != [] %>
 	<h1 align="center">Event Inbox </h1>
 
-	<div class="map"><%= image_tag("map.png") %></div>
-
+	<div class="map" id="map-canvas"></div>
+	
 	<div class="event-boxes" align="center">
 		<% @eventinvites.each_slice(3) do |batch| %>
 			<div class="row-fluid event-trio">
