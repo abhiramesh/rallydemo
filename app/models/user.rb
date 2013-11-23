@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   def get_user_info
   	if self.facebook
-		g = self.facebook.fql_multiquery({ "friends" => "SELECT uid2 FROM friend WHERE uid1=me()", "fullfriends" => "SELECT name,uid,pic_square FROM user WHERE uid IN (SELECT uid2 FROM #friends)", "myevents" => "SELECT eid, uid, rsvp_status FROM event_member WHERE uid = me()", "myeventdetails" => "SELECT eid, all_members_count, attending_count, declined_count, name, pic_big, start_time, unsure_count, location, description FROM event WHERE eid IN (SELECT eid FROM #myevents)", "friendlists" => "SELECT count, flid, name, type FROM friendlist WHERE owner = me()", "friendlistmembers" => "SELECT uid, flid FROM friendlist_member WHERE flid IN (SELECT flid FROM #friendlists)" })
+		g = self.facebook.fql_multiquery({ "friends" => "SELECT uid2 FROM friend WHERE uid1=me()", "fullfriends" => "SELECT name,uid,pic_square FROM user WHERE uid IN (SELECT uid2 FROM #friends)", "myevents" => "SELECT eid, uid, rsvp_status FROM event_member WHERE uid = me() AND start_time >= now()", "myeventdetails" => "SELECT eid, all_members_count, attending_count, declined_count, name, pic_big, start_time, unsure_count, location, description FROM event WHERE eid IN (SELECT eid FROM #myevents)", "friendlists" => "SELECT count, flid, name, type FROM friendlist WHERE owner = me()", "friendlistmembers" => "SELECT uid, flid FROM friendlist_member WHERE flid IN (SELECT flid FROM #friendlists)" })
   		if g
   			my_array = JSON.parse(g.to_json)
 	    	friends_hash = my_array["fullfriends"]
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
 	  	f = self.facebook.batch do |b|
 	      (0..9).each do |var|
 	        var=var*400
-	        b.fql_multiquery({ "friends" => "SELECT uid2 FROM friend WHERE uid1=me() LIMIT 400 OFFSET #{var}", "myfriendsevents" => "SELECT eid, uid, rsvp_status FROM event_member WHERE uid IN (SELECT uid2 FROM #friends) LIMIT 10", "myfriendseventdetails" => "SELECT eid,all_members_count, attending_count, declined_count, name, pic_big, start_time, unsure_count, location, description FROM event WHERE eid IN (SELECT eid FROM #myfriendsevents)"})
+	        b.fql_multiquery({ "friends" => "SELECT uid2 FROM friend WHERE uid1=me() LIMIT 400 OFFSET #{var}", "myfriendsevents" => "SELECT eid, uid, rsvp_status FROM event_member WHERE uid IN (SELECT uid2 FROM #friends) AND start_time >= now() LIMIT 10", "myfriendseventdetails" => "SELECT eid,all_members_count, attending_count, declined_count, name, pic_big, start_time, unsure_count, location, description FROM event WHERE eid IN (SELECT eid FROM #myfriendsevents)"})
 	      end
 	    end
 	    if f
