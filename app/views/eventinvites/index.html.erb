@@ -4,8 +4,9 @@
 
 <div class="event-boxes" align="center">
 	<div class="row event-trio">
+		<% count = 0 %>
 		<%(0..2).each do |event| %>
-			<div class="col-md-4 event-box" data-toggle="modal">
+			<div class="col-md-4 event-box" id="myModal<%=count%>">
 				<div class="event-details">
 					<span class="event-name">Event name</span>
 					<span class="event-datetime">Nov 24 @ 10pm</span>
@@ -15,11 +16,13 @@
 					<%= image_tag("image.png") %>
 				</div>
 			</div>
+			<% count += 1 %>
 		<% end %>
 	</div>
 	<div class="row event-trio">
+		<% count = 0 %>
 		<%(0..2).each do |event| %>
-			<div class="col-md-4 event-box" data-toggle="modal">
+			<div class="col-md-4 event-box" id="myModal<%=count%>">
 				<div class="event-details">
 					<span class="event-name">Event name</span>
 					<span class="event-datetime">Nov 24 @ 10pm</span>
