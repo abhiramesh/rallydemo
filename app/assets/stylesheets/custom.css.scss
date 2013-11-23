@@ -15,7 +15,6 @@ html, body, p, div {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 30px;
-	font-family: 'Nexa Light';
 }
 
 .event-trio {
@@ -27,17 +26,26 @@ html, body, p, div {
 	overflow: hidden;
 	vertical-align: top;
 	border: solid 1px #777;
+	cursor: pointer;
+	display: inline-block;
 	img {
-		border-radius: 5px;
 		width: 200px;
 		height: 200px;
+		border-radius: 5px;	
 	}
+}
+
+
+
+.event-details {
+
 }
 
 .event-name {
 	font-weight: bold;
-	font-size: 28px;
-	cursor: pointer;
+	font-size: 24px;
+	/*white-space: nowrap;
+    overflow: hidden;*/
 }
 
 .event-datetime {
@@ -45,9 +53,6 @@ html, body, p, div {
 	margin-right: 30px;
 }
 
-.event-image {
-	cursor: pointer;
-}
 
 
 

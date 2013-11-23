@@ -7,15 +7,15 @@
 		<% @eventinvites.each_slice(3) do |batch| %>
 			<div class="row-fluid event-trio">
 				<% batch.each do |invite| %>
-					<div class="col-md-4 event-box" id="myModal<%=invite.id%>">
-						<div class="event-details">
-							<span class="event-name"><%=invite.event.name[0..30]%>...</span>
-						</div>
-						<div class="event-image">
+					<div class="col-md-4 event-box row" id="myModal<%=invite.id%>">
+						<div class="col-md-5">
 							<img src="<%=invite.event.pic_big%>">
 						</div>
-						<span class="event-datetime"><%=Date::MONTHNAMES[invite.event.start_time.to_datetime.month]%> <%= invite.event.start_time.to_datetime.day %> <%=invite.event.start_time.to_datetime.strftime("%-I:%M %P")%></span>
-						<span class="event-distance">.1 miles</span>
+						<div class="event-details col-md-7">
+							<span class="event-name"><%=invite.event.name[0..30].titleize%>...</span><br/><br/>
+							<span class="event-datetime"><%=Date::MONTHNAMES[invite.event.start_time.to_datetime.month]%> <%= invite.event.start_time.to_datetime.day %> <%=invite.event.start_time.to_datetime.strftime("%-I:%M %P")%></span>
+							<span class="event-distance">.1 miles</span>
+						</div>
 					</div>
 				<% end %>
 			</div>
