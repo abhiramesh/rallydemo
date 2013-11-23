@@ -4,6 +4,12 @@ Rally::Application.routes.draw do
   resources :eventinvites
   resources :events
   resources :friends
+  
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do
+    match '/logout', :to => "devise/sessions#destroy"
+    get '/users/auth/facebook', :to => "omniauth_callbacks#facebook"
+  end
 
   namespace :api do
     namespace :v1 do
@@ -11,11 +17,9 @@ Rally::Application.routes.draw do
     end
   end
 
+  resources :users
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do
-    get '/logout', :to => "devise/sessions#destroy"
-    get '/users/auth/facebook', :to => "omniauth_callbacks#facebook"
-  end
+  get '/poll_job', :to => "eventinvites#check_get_user_info_job"
 
   root :to => 'static_pages#home'
 

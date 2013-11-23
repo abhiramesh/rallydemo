@@ -1,57 +1,91 @@
-<h1 align="center">Event Inbox</h1>
+<% if @eventinvites != [] %>
+	<h1 align="center">Event Inbox </h1>
 
-<div class="map"><%= image_tag("map.png") %></div>
+	<div class="map"><%= image_tag("map.png") %></div>
 
-<div class="event-boxes" align="center">
-	<div class="row event-trio">
-		<% count = 0 %>
-		<%(0..2).each do |event| %>
-			<div class="col-md-4 event-box" id="myModal<%=count%>">
-				<div class="event-details">
-					<span class="event-name">Event name</span>
-					<span class="event-datetime">Nov 24 @ 10pm</span>
-					<span class="event-distance">.1 miles</span>
+	<div class="event-boxes" align="center">
+		<div class="row event-trio">
+			<% count = 0 %>
+			<%(0..2).each do |event| %>
+				<div class="col-md-4 event-box" id="myModal<%=count%>">
+					<div class="event-details">
+						<span class="event-name">Event name</span>
+						<span class="event-datetime">Nov 24 @ 10pm</span>
+						<span class="event-distance">.1 miles</span>
+					</div>
+					<div class="event-image">
+						<%= image_tag("image.png") %>
+					</div>
 				</div>
-				<div class="event-image">
-					<%= image_tag("image.png") %>
+				<% count += 1 %>
+			<% end %>
+		</div>
+		<div class="row event-trio">
+			<% count = 0 %>
+			<%(0..2).each do |event| %>
+				<div class="col-md-4 event-box" id="myModal<%=count%>">
+					<div class="event-details">
+						<span class="event-name">Event name</span>
+						<span class="event-datetime">Nov 24 @ 10pm</span>
+						<span class="event-distance">.1 miles</span>
+					</div>
+					<div class="event-image">
+						<%= image_tag("image.png") %>
+					</div>
 				</div>
-			</div>
-			<% count += 1 %>
-		<% end %>
+			<% end %>
+		</div>
 	</div>
-	<div class="row event-trio">
-		<% count = 0 %>
-		<%(0..2).each do |event| %>
-			<div class="col-md-4 event-box" id="myModal<%=count%>">
-				<div class="event-details">
-					<span class="event-name">Event name</span>
-					<span class="event-datetime">Nov 24 @ 10pm</span>
-					<span class="event-distance">.1 miles</span>
-				</div>
-				<div class="event-image">
-					<%= image_tag("image.png") %>
-				</div>
-			</div>
-		<% end %>
+
+	<!-- Modal --> 
+	<div class="modal hide" id="myModal">
+	  <div class="modal-header">
+	    <button class="close" data-dismiss="modal">×</button>
+	    <h3>Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>One fine body…</p>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" data-dismiss="modal">Close</a>
+	    <a href="#" class="btn btn-primary">Save changes</a>
+	  </div>
+	</div>​
+	<!-- End Modal -->
+<% else %>
+	<div class="container" align="center">
+		<img src="/assets/loading.gif">
 	</div>
-</div>
+<% end %>
 
-<!-- Modal (will appear thanks to the data-toggle="modal" --> 
-<div class="modal hide" id="myModal"><!-- note the use of "hide" class -->
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">×</button>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a><!-- note the use of "data-dismiss" -->
-    <a href="#" class="btn btn-primary">Save changes</a>
-  </div>
-</div>​
-<!-- end modal -->
-
-
-<br/><br/><br/><br/><br/><br/><br/>
-
+<% if current_user.sign_in_count == 1 %>
+<script type="text/javascript">
+$(document).ready(function(){
+	worker();
+function worker(){
+	$.ajax({
+		type: "GET",
+		url: '/poll_job',
+		data: { job_id: "<%=@job_id%>" },
+		dataType: "json",
+		complete: function(response) {
+			if (response.responseText == "ready"){
+				if(!window.location.hash){
+					window.location = window.location + "#loaded";
+					window.location.reload();	
+				};
+				
+			};
+			if (response.responseText == "no"){
+				setTimeout(worker, 1000);
+				console.log(response.responseText);
+			};
+			if (response.responseText == "error"){
+				setTimeout(worker, 2000);
+			};
+		}
+	});	
+};
+});
+</script>
+<% end %>
