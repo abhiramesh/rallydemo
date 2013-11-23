@@ -69,8 +69,9 @@ function worker(){
 		data: { job_id: "<%=@job_id%>" },
 		dataType: "json",
 		complete: function(response) {
+			var contains = (window.location.href.indexOf('#loaded') > -1);
 			if (response.responseText == "ready"){
-				if(!window.location.hash){
+				if(contains != true){
 					window.location = window.location + "#loaded";
 					window.location.reload();	
 				};
