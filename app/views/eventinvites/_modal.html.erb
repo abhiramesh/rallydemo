@@ -1,0 +1,29 @@
+<!-- Modal --> 
+<% i = Eventinvite.first %>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= i.event.name %> </h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-5">
+            <img src="<%=i.event.pic_big%>">
+        </div>
+        <div class="event-details col-md-7">
+          <span class="event-name"><%=i.event.name[0..30].titleize%>...</span><br/><br/>
+          <span class="event-datetime"><%=Date::MONTHNAMES[i.event.start_time.to_datetime.month]%> <%= i.event.start_time.to_datetime.day %> <%=i.event.start_time.to_datetime.strftime("%-I:%M %P")%></span><br/>
+          <span class="event-distance">.1 miles</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Modal -->

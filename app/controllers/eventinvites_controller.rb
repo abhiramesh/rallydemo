@@ -22,6 +22,14 @@ class EventinvitesController < ApplicationController
 		end
 	end
 
+	def showmodal
+		event_id = params["id"].to_i
+		puts "NIGGER"
+		respond_to do |format|
+			format.js { format.js { render "modal", :locals => {:event_id => event_id} } }
+		end
+	end
+
 
 end
 
