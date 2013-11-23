@@ -21,6 +21,7 @@ Rally::Application.routes.draw do
   resources :users
 
   get '/poll_job', :to => "eventinvites#check_get_user_info_job"
+  get '/showmodal', :to => "eventinvites#showmodal"
 
   root :to => 'static_pages#home'
 

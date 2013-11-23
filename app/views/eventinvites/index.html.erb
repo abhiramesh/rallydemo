@@ -1,9 +1,6 @@
 <% if @eventinvites != [] %>
 	<h1 align="center">Event Inbox </h1>
 
-	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
 
 	<div class="map"><%= image_tag("map.png") %></div>
 
@@ -11,17 +8,20 @@
 		<% @eventinvites.each_slice(3) do |batch| %>
 			<div class="row-fluid event-trio">
 				<% batch.each do |invite| %>
-					<%= render "modal", :invite => invite %>
-					<div class="col-md-4 event-box row" data-toggle="modal" data-target="#myModal">
-						<div class="col-md-5">
-							<img src="<%=invite.event.pic_big%>">
+					<%= render "modal" %>
+					<!-- Passing invite id here -->
+					<a href="/showmodal?id=<%= invite.id %>">
+						<div class="col-md-4 event-box row" data-toggle="modal" data-target="#myModal">
+							<div class="col-md-5">
+								<img src="<%=invite.event.pic_big%>">
+							</div>
+							<div class="event-details col-md-7">
+								<span class="event-name"><%=invite.event.name[0..30].titleize%>...</span><br/><br/>
+								<span class="event-datetime"><%=Date::MONTHNAMES[invite.event.start_time.to_datetime.month]%> <%= invite.event.start_time.to_datetime.day %> <%=invite.event.start_time.to_datetime.strftime("%-I:%M %P")%></span><br/>
+								<span class="event-distance">.1 miles</span>
+							</div>
 						</div>
-						<div class="event-details col-md-7">
-							<span class="event-name"><%=invite.event.name[0..30].titleize%>...</span><br/><br/>
-							<span class="event-datetime"><%=Date::MONTHNAMES[invite.event.start_time.to_datetime.month]%> <%= invite.event.start_time.to_datetime.day %> <%=invite.event.start_time.to_datetime.strftime("%-I:%M %P")%></span><br/>
-							<span class="event-distance">.1 miles</span>
-						</div>
-					</div>
+					</a>
 				<% end %>
 			</div>
 		<% end %>
