@@ -6,14 +6,7 @@
 <% if @eventinvites != [] %>
 	<h1 align="center">Event Inbox </h1>
 
-<<<<<<< HEAD
 	<div class="map" id="map-canvas"></div>
-	
-=======
-
-	<div class="map"><%= image_tag("map.png") %></div>
-
->>>>>>> b9e2a3299d7c410db98741b3205025c445cb0129
 	<div class="event-boxes" align="center">
 		<% @eventinvites.each_slice(3) do |batch| %>
 			<div class="row-fluid event-trio">
