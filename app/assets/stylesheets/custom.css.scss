@@ -19,6 +19,13 @@ body{
 	width: 150px;
 }
 
+.tagline{
+	color: $rallyblue;
+	font-size: 34px;
+	line-height: 36px;
+	padding: 30px;
+}
+
 .map {
 	width: 100%;
 	text-align: center;
@@ -27,7 +34,9 @@ body{
 
 #map-canvas{
 	margin-bottom: 20px;
+	background: transparent url(loading.gif) no-repeat center center;
 }
+
 
 .event-box {
 	overflow: hidden;

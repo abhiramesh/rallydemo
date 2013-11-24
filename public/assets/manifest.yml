@@ -15,7 +15,7 @@ rally.png: rally-b9968f74129eec09950cf75ca81113e0.png
 rally/index.png: rally-b9968f74129eec09950cf75ca81113e0.png
 application.js: application-02c815c845aff6c5fa16c50c31a21c8d.js
 application/index.js: application-02c815c845aff6c5fa16c50c31a21c8d.js
-application.css: application-82d051285d2d127a55719a5080a1d967.css
-application/index.css: application-82d051285d2d127a55719a5080a1d967.css
+application.css: application-963bb0c8e60e6a1e02d886c0b71df796.css
+application/index.css: application-963bb0c8e60e6a1e02d886c0b71df796.css
 jquery.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
 jquery/index.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map

@@ -2,8 +2,6 @@ class EventinvitesController < ApplicationController
 
 	before_filter :authenticate_user!
 
-	require 'mechanize'
-
 	def index
 		if params[:waiting]
 			@job_id = params[:waiting]
@@ -11,8 +9,14 @@ class EventinvitesController < ApplicationController
 		@eventinvites = current_user.eventinvites
 	end
 
-	def get_event_coordinates
+	def get_event_list
 		@eventinvites = current_user.eventinvites
+		
+		current_user.friends.find_each do |f|
+			myinvites = f.eventinvites
+			@eventinvites.concat(myinvites)
+		end
+
 		@events_array = []
 
 		@eventinvites.each do |invite|
@@ -22,15 +26,8 @@ class EventinvitesController < ApplicationController
 			else
 				event_location = ""
 			end
-			a = Mechanize.new
-			response = a.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + event_location + "&sensor=false")
-			if JSON.parse(response.content) && JSON.parse(response.content)["results"] && JSON.parse(response.content)["results"][0] && JSON.parse(response.content)["results"][0]["geometry"] && JSON.parse(response.content)["results"][0]["geometry"]["bounds"] && JSON.parse(response.content)["results"][0]["geometry"]["bounds"]["northeast"]
-				lat = JSON.parse(response.content)["results"][0]["geometry"]["bounds"]["northeast"]["lat"]
-				lng = JSON.parse(response.content)["results"][0]["geometry"]["bounds"]["northeast"]["lng"]
-				hash.merge!("lat" => lat.to_s)
-				hash.merge!("lng" => lng.to_s)
-			end
 			hash.merge!("name" => invite.event.name)
+			hash.merge!("location" => event_location)
 			@events_array << hash
 		end
 		render json: @events_array

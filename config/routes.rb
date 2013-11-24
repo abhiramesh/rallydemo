@@ -22,7 +22,7 @@ Rally::Application.routes.draw do
 
   get '/poll_job', :to => "eventinvites#check_get_user_info_job"
   get '/showmodal', :to => "eventinvites#showmodal"
-  get '/get_event_coordinates', :to => "eventinvites#get_event_coordinates"
+  get '/get_event_list', :to => "eventinvites#get_event_list"
 
   root :to => 'static_pages#home'
 
