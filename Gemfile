@@ -14,7 +14,7 @@ gem 'koala'
 gem 'delayed_job_active_record'
 gem 'client_side_validations'
 gem 'will_paginate', '~> 3.0'
-#gem 'geocoder'
+gem 'mechanize'
 
 
 # Gems used only for assets and not required

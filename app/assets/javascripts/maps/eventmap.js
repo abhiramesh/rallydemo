@@ -1,9 +1,12 @@
+
 var initialLocation;
 var siberia = new google.maps.LatLng(60, 105);
 var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
 var browserSupportFlag =  new Boolean();
 var citymap = {};
 var cityCircle;
+var eventsArray;
+
 
 function initialize() {
   var myOptions = {
@@ -12,6 +15,17 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
+  $.ajax({
+    type: "GET",
+    url: '/get_event_coordinates',
+    dataType: "json",
+    async: false,
+    complete: function(response) {
+      eventsArray = response.responseText;
+    }
+  });
+  console.log(eventsArray);
+  
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
     browserSupportFlag = true;

@@ -52,6 +52,8 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    domain_name (0.5.4)
+      unf (~> 0.0.3)
     erubis (2.7.0)
     execjs (2.0.2)
     faraday (0.8.7)
@@ -74,10 +76,22 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (2.5.1)
+      domain_name (~> 0.5, >= 0.5.1)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.25)
     multi_json (1.8.2)
     multipart-post (1.2.0)
+    net-http-digest_auth (1.2.1)
+    net-http-persistent (2.8)
     newrelic_rpm (3.6.6.147)
+    nokogiri (1.5.10)
+    ntlm-http (0.1.1)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -141,8 +155,12 @@ GEM
     uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.0.5)
+      unf_ext
+    unf_ext (0.0.5)
     warden (1.2.3)
       rack (>= 1.0)
+    webrobots (0.0.13)
     will_paginate (3.0.4)
 
 PLATFORMS
@@ -156,6 +174,7 @@ DEPENDENCIES
   jquery-rails
   json
   koala
+  mechanize
   newrelic_rpm
   omniauth-facebook
   pg (= 0.14.1)
