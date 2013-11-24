@@ -21,10 +21,30 @@ function initialize() {
     dataType: "json",
     async: false,
     complete: function(response) {
-      eventsArray = response.responseText;
+      eventsArray = response.responseJSON;
     }
   });
-  console.log(eventsArray);
+  
+
+  // citymap['philly'] = {
+  //   center: initialLocation,
+  //   number: 12
+  //   };
+  //   for (var city in citymap) {
+  //     var numberOptions = {
+  //       strokeColor: '#e96936',
+  //       strokeOpacity: 0.7,
+  //       strokeWeight: 1,
+  //       fillColor: '#e96936',
+  //       fillOpacity: 0.7,
+  //       map: map,
+  //       center: citymap["philly"].center,
+  //       radius: 100
+  //     };
+  //     // Add the circle for this city to the map.
+  //     cityCircle = new google.maps.Circle(numberOptions);
+  //   }
+
   
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
@@ -33,32 +53,24 @@ function initialize() {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
 
-   //    var marker = new google.maps.Marker({
-	  //   position: initialLocation,
-	  //   map: map,
-	  //   // animation: google.maps.Animation.BOUNCE,
-	  //   title:"Hello World!"
-	  // });
-
-	  citymap['philly'] = {
-		center: initialLocation,
-		number: 12
-	  };
-	  for (var city in citymap) {
-	    var numberOptions = {
-	      strokeColor: '#e96936',
-	      strokeOpacity: 0.7,
-	      strokeWeight: 1,
-	      fillColor: '#e96936',
-	      fillOpacity: 0.7,
-	      map: map,
-	      center: citymap[city].center,
-	      radius: 100
-	    };
-	    // Add the circle for this city to the map.
-	    cityCircle = new google.maps.Circle(numberOptions);
-	  }
-
+        for (var e in eventsArray) {
+          if (eventsArray[e]["lat"] && eventsArray[e]["lng"]){
+            var point = new google.maps.LatLng(parseFloat(eventsArray[e]["lat"]), parseFloat(eventsArray[e]["lng"]));
+            var eventOptions = {
+              strokeColor: '#e96936',
+              strokeOpacity: 0.7,
+              strokeWeight: 1,
+              fillColor: '#e96936',
+              fillOpacity: 0.7,
+              map: map,
+              center: point,
+              radius: 100000
+            };
+            console.log(point);
+            eventCircle = new google.maps.Circle(eventOptions);
+          };
+        };
+	  
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });

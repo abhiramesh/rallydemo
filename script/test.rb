@@ -15,4 +15,6 @@ hash.merge!("lng" => lng.to_s)
 
 array << hash
 
-puts array
+array.each do |a|
+	puts a["lat"]
+end
