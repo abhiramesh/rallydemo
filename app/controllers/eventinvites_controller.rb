@@ -12,10 +12,10 @@ class EventinvitesController < ApplicationController
 	def get_event_list
 		@eventinvites = current_user.eventinvites
 		
-		current_user.friends.find_each do |f|
-			myinvites = f.eventinvites
-			@eventinvites.concat(myinvites)
-		end
+		# current_user.friends.find_each do |f|
+		# 	myinvites = f.eventinvites
+		# 	@eventinvites.concat(myinvites)
+		# end
 
 		@events_array = []
 
