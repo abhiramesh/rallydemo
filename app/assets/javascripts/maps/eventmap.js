@@ -8,6 +8,14 @@ var eventsArray;
 var locationCity;
 var actualLocation;
 var eventLocation;
+var styleArray = [
+  {
+    "stylers": [
+      { "invert_lightness": true },
+      { "visibility": "on" }
+    ]
+  }
+];
 
 
 function initialize() {
@@ -15,6 +23,8 @@ function initialize() {
     zoom: 13,
     scrollwheel: false,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: styleArray
+
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 

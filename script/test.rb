@@ -18,3 +18,8 @@ array << hash
 array.each do |a|
 	puts a["lat"]
 end
+
+current_user.friends.find_each do |f|
+myinvites = f.eventinvites
+@eventinvites.concat(myinvites)
+end

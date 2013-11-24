@@ -16,7 +16,6 @@ class EventinvitesController < ApplicationController
 		# 	myinvites = f.eventinvites
 		# 	@eventinvites.concat(myinvites)
 		# end
-
 		@events_array = []
 
 		@eventinvites.each do |invite|

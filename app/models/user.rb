@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
 						    Eventinvite.connection.execute "INSERT INTO eventinvites (eid, uid, rsvp_status, created_at, updated_at) values #{inserts.join(", ")}"
 						    rescue
 						    end
-						    self.friends.each do |f|
+						    self.friends.find_each do |f|
 						    	if Eventinvite.where(uid: f.uid, friend_id: nil)
 						    		Eventinvite.where(uid: f.uid, friend_id: nil).each do |i|
 						    			i.friend_id = f.id
@@ -150,6 +150,14 @@ class User < ActiveRecord::Base
 						    		end
 						    	end
 						    end
+						    self.friends.find_each do |f|
+							    f.eventinvites.find_each do |i|
+							    	if i.event_id == nil
+										i.event_id = Event.where(eid: i.eid).first.id
+										i.save!
+									end
+							    end
+							end
 				    	end
 	    			end
 	    		end
