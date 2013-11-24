@@ -1,40 +1,51 @@
+$rallyblue: #209cf5;
 
 html, body, p, div {
 	font-size: 22px;
+	font-family: "Nexa Light";
 }
 
-h1 {
-	font-family: "Nexa Light";
-	font-size: 26px;
+body{
+	background: #F6F6F6 !important;
+}
+
+.header{
+	border-bottom: solid 2px $rallyblue;
+	background: white;
+	margin-bottom: 20px;
+}
+
+.rally-logo{
+	width: 150px;
 }
 
 .map {
 	width: 100%;
 	text-align: center;
-	height: 700px;
+	height: 600px;
 }
 
-.event-boxes {
-	width: 100%;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-.event-trio {
-	margin-top: 30px;
-
+#map-canvas{
+	margin-bottom: 20px;
 }
 
 .event-box {
 	overflow: hidden;
+	width: 100%;
 	vertical-align: top;
-	border: solid 1px #777;
+	border: solid 1px #CCC;
+	border-radius: 3px;
+	background: #FFFFFF;
+	padding: 10px;
 	cursor: pointer;
 	display: inline-block;
+	margin: 0px 0px 20px 0px;
+	text-align: left;
+	max-width: 500px;
 	img {
-		width: 200px;
-		height: 200px;
-		border-radius: 5px;	
+		width: 120px;
+		height: 120px;
+		border-radius: 3px;
 	}
 }
 
@@ -42,18 +53,48 @@ h1 {
 
 }
 
+.scrolling-event-inbox{
+	max-height: 600px;
+	overflow-y: scroll;
+}
+
+
 .event-name {
 	font-weight: bold;
 	font-size: 24px;
-	/*white-space: nowrap;
-    overflow: hidden;*/
+	font-size: 16px;
+	line-height: 24px;
+	height: 50px;
+	overflow-y: hidden;
+	color: black;
 }
 
 .event-datetime {
-	margin-left: 30px;
-	margin-right: 30px;
-	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 16px;
+	color: black;
 }
+
+.calendar{
+	width: 70px;
+	border-bottom: solid 2px $rallyblue;
+	border-right: solid 2px $rallyblue;
+	border-left: solid 2px $rallyblue;
+	text-align: center;
+	.month{
+		background: $rallyblue;
+		color: white;
+		margin-bottom: 10px;
+		padding-top: 5px;
+		font-size: 14px;
+	}
+	.day{
+		color: black;
+		font-size: 18px;
+	}
+}
+
 
 .event-distance {
 	font-size: 18px;
